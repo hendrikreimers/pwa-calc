@@ -2,5 +2,5 @@
 
 $(function() {
 	var calc = new Calculator('#calc');
-	calc.props.debug = true;
+	//calc.props.debug = true;
 });
