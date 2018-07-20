@@ -117,15 +117,15 @@ class CalculatorController extends CalculatorAbstractController {
             bufVal = this.getBufferValue();
 
         // @todo better error handling
-		if ( bufVal < 0 ) return false;
+        if ( bufVal < 0 ) return false;
 
-		// calc
+        // calc
         curVal = (bufVal / 100) * curVal;
 
         // set real val to calc
         if ( $.isNumeric(curVal) ) {
-        	this.setViewValue(curVal, false, false);
-		} else return false;
+           this.setViewValue(curVal, false, false);
+        } else return false;
 	}
 	
 	/**
