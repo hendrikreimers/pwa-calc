@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="de">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet"> 
+	<link rel="stylesheet" href="css/calc.css">
+
+	<link rel="apple-touch-icon" href="touch-icon-iphone.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="images/icons/icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="images/icons/icon-192x192.png">
+	<link rel="apple-touch-icon" sizes="167x167" href="images/icons/icon-152x152.png">
+
+	<link rel="manifest" href="manifest.json">
+
+	<title>Calc</title>
+</head>
+<body>
+
+	<div id="calc" class="container-fluid max-height">
+		<div class="row max-height mh-2">
+			<div class="col-12 bg-dark txt-white result">
+				<span class="align-bottom" id="value">42</span>
+			</div>
+		</div>
+		<div class="row max-height mh-1">
+			<div class="col-3 bg-gray btn" data-act="C">
+				<span class="align-middle">C</span>
+			</div>
+			<div class="col-3 bg-gray btn" data-act="+/-">
+				<span class="align-middle">&plusmn;</span>
+			</div>
+			<div class="col-3 bg-gray btn" data-op="%">
+				<span class="align-middle">%</span>
+			</div>
+			<div class="col-3 bg-orange txt-white btn" data-op="/">
+				<span class="align-middle">&divide;</span>
+			</div>
+		</div>
+		<div class="row max-height mh-1">
+			<div class="col-3 bg-lightgray btn" data-val="7">
+				<span class="align-middle">7</span>
+			</div>
+			<div class="col-3 bg-lightgray btn" data-val="8">
+				<span class="align-middle">8</span>
+			</div>
+			<div class="col-3 bg-lightgray btn" data-val="9">
+				<span class="align-middle">9</span>
+			</div>
+			<div class="col-3 bg-orange txt-white btn" data-op="*">
+				<span class="align-middle">&times;</span>
+			</div>
+		</div>
+		<div class="row max-height mh-1">
+			<div class="col-3 bg-lightgray btn" data-val="4">
+				<span class="align-middle">4</span>
+			</div>
+			<div class="col-3 bg-lightgray btn" data-val="5">
+				<span class="align-middle">5</span>
+			</div>
+			<div class="col-3 bg-lightgray btn" data-val="6">
+				<span class="align-middle">6</span>
+			</div>
+			<div class="col-3 bg-orange txt-white btn" data-op="-">
+				<span class="align-middle">&minus;</span>
+			</div>
+		</div>
+		<div class="row max-height mh-1">
+			<div class="col-3 bg-lightgray btn" data-val="1">
+				<span class="align-middle">1</span>
+			</div>
+			<div class="col-3 bg-lightgray btn" data-val="2">
+				<span class="align-middle">2</span>
+			</div>
+			<div class="col-3 bg-lightgray btn" data-val="3">
+				<span class="align-middle">3</span>
+			</div>
+			<div class="col-3 bg-orange txt-white btn" data-op="+">
+				<span class="align-middle">&plus;</span>
+			</div>
+		</div>
+		<div class="row max-height mh-1">
+			<div class="col-6 bg-lightgray btn" data-val="0">
+				<span class="align-middle left">0</span>
+			</div>
+			<div class="col-3 bg-lightgray btn" data-op=",">
+				<span class="align-middle">&#44;</span>
+			</div>
+			<div class="col-3 bg-orange txt-white btn" data-act="=">
+				<span class="align-middle">=</span>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/Lib/jquery-3.3.1.slim.min.js"></script>
+	<script src="js/Classes/CalculatorAbstractController.class.js"></script>
+	<script src="js/Classes/CalculatorController.class.js"></script>
+	<script src="js/Classes/Calculator.class.js"></script>
+	<script src="js/calculator.js"></script>
+</body>
+</html>
