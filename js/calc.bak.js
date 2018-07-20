@@ -1,3 +1,6 @@
+/**
+ * First old quick version
+ */
 $(function() {
 	
 	var resultView = $('#calc #value'),

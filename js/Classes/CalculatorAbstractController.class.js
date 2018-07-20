@@ -1,5 +1,13 @@
 'use strict';
 
+/*********************************************************/
+/*  Calculator PWA                                       */
+/*                                                       */
+/*  Author: Hendrik Reimers                              */
+/*  GIT: https://www.github.com/hendrikreimers/pwa-calc  */
+/*                                                       */
+/*********************************************************/
+
 class CalculatorAbstractController {
 	
 	/**
@@ -69,6 +77,39 @@ class CalculatorAbstractController {
 		
 		console.log(msg);
 	}
+
+    /**
+     * Calculates ;-)
+     *
+     * @return void
+     */
+    calculate() {
+        // Calc if another operator is active
+        if ( this.getOperator() != '' ) {
+            let curOp  = this.getOperator(),
+                curVal = this.getViewValue(true),
+                bufVal = this.getBufferValue();
+
+            this.log('calc: ' + bufVal + ' ' + curOp + ' ' + curVal, 'calculate');
+
+            // Get operation function
+            let opFunc = this.getOperatorFunc(curOp);
+
+            // If available calculate
+            if ( opFunc !== false ) {
+                this.log('opFuncCall', 'calculate');
+
+                // Calculate
+                let result = opFunc(bufVal, curVal);
+
+                // Write the calculated val to the view
+                this.setViewValue(result, false, false);
+
+                // Reset the buffer so next time its not multiplied
+                this.resetBuffer();
+            }
+        }
+    }
 	
 	/**
 	 * Attach the click events to each button
@@ -76,7 +117,7 @@ class CalculatorAbstractController {
 	 * @return void
 	 */
 	setEventsToButtons() {
-		this.log('set event buttons', 'callActionMethod');
+		this.log('set event buttons', 'setEventsToButtons');
 		
 		let self = this;
 		
@@ -84,7 +125,7 @@ class CalculatorAbstractController {
 			var numVal = $(this).data('val');
 			
 			self.log(numVal, 'btnEvtNum');
-			self.callActionMethod(el, numVal);
+			self.callNumberMethod(el, numVal);
 		});
 		
 		$(this.props.viewButtonsOp).on('click', function(el) {
@@ -230,6 +271,18 @@ class CalculatorAbstractController {
 		this.props.bufferOperator = '';
 		this.props.resetViewValNextTime = false;
 	}
+
+    /**
+     * Calls an action method based on the key string
+     *
+     * @param mixed el
+     * @param string actionKey
+     * @return void
+     */
+    callNumberMethod(el, actionKey) {
+        this.log(actionKey, 'callNumberMethod');
+        this.numberAction(el, actionKey);
+    }
 	
 	/**
 	 * Calls an action method based on the key string
@@ -249,7 +302,6 @@ class CalculatorAbstractController {
 			case '=':
 				this.resultAction(el, actionKey); break;
 			default:
-				this.numberAction(el, actionKey);
 				break;
 		}
 	}
@@ -289,7 +341,7 @@ class CalculatorAbstractController {
 	 * @return float
 	 */
 	convertToNumber(val) {
-		if ( typeof val.replace != 'function' ) 
+		if ( typeof val.replace !== 'function' )
 			val = val.toString();
 		
 		val = val.replace('.', '');

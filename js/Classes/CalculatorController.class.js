@@ -1,44 +1,15 @@
 'use strict';
 
+/*********************************************************/
+/*  Calculator PWA                                       */
+/*                                                       */
+/*  Author: Hendrik Reimers                              */
+/*  GIT: https://www.github.com/hendrikreimers/pwa-calc  */
+/*                                                       */
+/*********************************************************/
+
 class CalculatorController extends CalculatorAbstractController {
-	
-	/**
-	 * Calculates ;-)
-	 *
-	 * @return void
-	 */
-	calculate() {
-		// Calc if another operator is active
-		if ( this.getOperator() != '' ) {
-			let curOp  = this.getOperator(),
-				curVal = this.getViewValue(true),
-				bufVal = this.getBufferValue();
-			
-			this.log('calc: ' + bufVal + ' ' + curOp + ' ' + curVal, 'calculate');
-			
-			// Get operation function
-			let opFunc = this.getOperatorFunc(curOp);
-			
-			// If available calculate
-			if ( opFunc !== false ) {
-				this.log('opFuncCall', 'calculate');
-				
-				// Calculate
-				let result = opFunc(bufVal, curVal);
-				
-				// Write the calculated val to the view
-				this.setViewValue(result, false, false);
-				
-				// Reset the buffer so next time its not multiplied
-				this.resetBuffer();
-			}
-		}
-	}
-	
-	
-	
-	
-	
+
 	/****************************
 	 * ACTION METHODS
 	 */
@@ -114,13 +85,17 @@ class CalculatorController extends CalculatorAbstractController {
 	percentOperator() {
 		// Get the current values
 		var curVal = this.getViewValue(true),
-			bufVal = this.getBufferValue();
+			bufVal = this.getBufferValue(),
+			opFunc = this.getOperatorFunc('%');
 
 		// @todo better error handling
-		if ( bufVal < 0 ) return false;
+		if ( (bufVal < 0) || (typeof opFunc !== 'function') ) return false;
 
-		// calc
-		curVal = (bufVal / 100) * curVal;
+        // debug
+        this.log('convert percent value', 'percentOperator');
+
+        // calc
+		curVal = this.getOperatorFunc('%')(bufVal, curVal);
 
 		// set real val to calc
 		if ( $.isNumeric(curVal) ) {
