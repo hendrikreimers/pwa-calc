@@ -113,19 +113,19 @@ class CalculatorController extends CalculatorAbstractController {
 	 */
 	percentOperator() {
 		// Get the current values
-        var curVal = this.getViewValue(true),
-            bufVal = this.getBufferValue();
+		var curVal = this.getViewValue(true),
+			bufVal = this.getBufferValue();
 
-        // @todo better error handling
-        if ( bufVal < 0 ) return false;
+		// @todo better error handling
+		if ( bufVal < 0 ) return false;
 
-        // calc
-        curVal = (bufVal / 100) * curVal;
+		// calc
+		curVal = (bufVal / 100) * curVal;
 
-        // set real val to calc
-        if ( $.isNumeric(curVal) ) {
-           this.setViewValue(curVal, false, false);
-        } else return false;
+		// set real val to calc
+		if ( $.isNumeric(curVal) ) {
+			this.setViewValue(curVal, false, false);
+		} else return false;
 	}
 	
 	/**
