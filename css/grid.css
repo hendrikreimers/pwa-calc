@@ -1,0 +1,39 @@
+html, body {
+    padding: 0;
+    margin: 0;
+
+    height: 100%;
+
+    overflow: hidden;
+}
+
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.col-3, .col-6, .col-12 {
+    display: flex;
+    flex-grow: 0;
+    flex-shrink: 1;
+}
+
+.col-3 {
+    flex-basis: 25%; /* could be simplified by removing flex-grow and -shrink and just write: "flex 0 1 25%;" */
+}
+
+.col-6 {
+    flex-basis: 50%;
+}
+
+.col-12 {
+    flex-basis: 100%;
+}
