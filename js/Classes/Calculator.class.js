@@ -79,7 +79,10 @@ class Calculator extends CalculatorController {
      */
     triggerClickEvent(dataKey, dataVal, elements) {
         // Filter through elements which has the given elId as data attribute and trigger a click event on them
-        Array.from(elements).filter(el => el.dataset[dataKey] == dataVal).map(el => el.click());
+        Array.from(elements).map(el => {
+            if ( el.dataset[dataKey] == dataVal ) el.click()
+        });
+        // Array.from(elements).filter(el => el.dataset[dataKey] == dataVal).map(el => el.click());
         // [...self.props.viewButtonsAct].filter(el => el.dataset.act == '=').map(el => el.click());
     }
 }
