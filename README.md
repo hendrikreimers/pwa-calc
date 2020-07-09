@@ -14,6 +14,7 @@ Feel free to extend, modify, or just feedback.
 Maybe this will come in future. But currently it's fine ;-)
 
 * Webpack usage
+* add package.json
 * any ideas or hints?
 
 ## Last changes
