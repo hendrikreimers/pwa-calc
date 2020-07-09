@@ -18,7 +18,9 @@ html, body {
 .bg-dark { background-color: #202020; }
 .bg-orange { background-color: #f68e13; }
 
-.txt-white { color: #fff; }
+.bg-dark, .bg-orange {
+	color: #fff; /* Text white on .bg-orange and .bg-dark */
+}
 
 
 
@@ -39,7 +41,7 @@ html, body {
 	border-left: 0;
 }
 
-.row > div.result {
+.row > div#value {
 	font-size: 12vh;
 	text-align: right;
 
