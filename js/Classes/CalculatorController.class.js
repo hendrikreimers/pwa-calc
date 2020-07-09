@@ -8,6 +8,12 @@
 /*                                                       */
 /*********************************************************/
 
+/**
+ * Main Class
+ *
+ * Implements the button actions used by these and the handling of operators
+ *
+ */
 class CalculatorController extends CalculatorAbstractController {
 
 	/****************************

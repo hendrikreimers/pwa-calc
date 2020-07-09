@@ -37,7 +37,7 @@ class Calculator extends CalculatorController {
         // Register keypress event
         document.addEventListener('keypress', function(evt) {
             // declarations
-            let key  = String.fromCharCode(evt.which),
+            let key  = evt.key,
                 expr = { num: /[0-9]/, op: /[\/*\-+,%]/ },
                 elId = null;
 

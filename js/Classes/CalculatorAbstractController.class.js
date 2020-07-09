@@ -8,6 +8,12 @@
 /*                                                       */
 /*********************************************************/
 
+/**
+ * More complex Controller to be an Abstract
+ *
+ * Implements any kind of helper functions (no actions)
+ * which are called by an action hit by an button or something else
+ */
 class CalculatorAbstractController {
 	
 	/**
