@@ -48,17 +48,17 @@ class CalculatorAbstractController {
 		this.properties();
 		
 		// Find elements
-		this.props.p              = $(parentIdentifier);                    // Calculator Wrapper
-		this.props.viewResult     = $(this.props.p).find('#value');         // Value field
-		this.props.viewButtonsNum = $(this.props.p).find('.btn[data-val]'), // Buttons for Numbers
-		this.props.viewButtonsOp  = $(this.props.p).find('.btn[data-op]'),  // Buttons for Operators
-		this.props.viewButtonsAct = $(this.props.p).find('.btn[data-act]'); // Buttons for Actions
-		
+		this.props.p              = document.querySelector(parentIdentifier);                           // Calculator Wrapper
+		this.props.viewResult     = document.getElementById('value');         // Value field
+		this.props.viewButtonsNum = this.props.p.querySelectorAll('.btn[data-val]'), // Buttons for Numbers
+		this.props.viewButtonsOp  = this.props.p.querySelectorAll('.btn[data-op]'),  // Buttons for Operators
+		this.props.viewButtonsAct = this.props.p.querySelectorAll('.btn[data-act]'); // Buttons for Actions
+
 		// Register Events to the buttons
 		this.setEventsToButtons();
 		
 		// Init value (not 42)
-		this.props.viewResult.text(0);
+		this.props.viewResult.innerText = 0;
 	}
 	
 	/**
@@ -120,27 +120,30 @@ class CalculatorAbstractController {
 		this.log('set event buttons', 'setEventsToButtons');
 		
 		let self = this;
-		
-		$(this.props.viewButtonsNum).on('click', function(el) {
-			var numVal = $(this).data('val');
-			
+
+		// Unpack with "[...NodeList]" to an array so we get an array on which we can map each element
+		Array.from(this.props.viewButtonsNum).map(el => el.addEventListener('click', function(el) {
+			var numVal = this.dataset.val;
+
 			self.log(numVal, 'btnEvtNum');
 			self.callNumberMethod(el, numVal);
-		});
-		
-		$(this.props.viewButtonsOp).on('click', function(el) {
-			var operatorVal = $(this).data('op');
+		}));
+
+		// Unpack with "[...NodeList]" to an array so we get an array on which we can map each element
+		Array.from(this.props.viewButtonsOp).map(el => el.addEventListener('click', function(el) {
+			var operatorVal = this.dataset.op;
 			
 			self.log(operatorVal, 'btnEvtOp');
 			self.callOperatorMethod(el, operatorVal);
-		});
-		
-		$(this.props.viewButtonsAct).on('click', function(el) {
-			var actionName = $(this).data('act');
+		}));
+
+		// Unpack with "[...NodeList]" to an array so we get an array on which we can map each element
+		Array.from(this.props.viewButtonsAct).map(el => el.addEventListener('click', function(el) {
+			var actionName = this.dataset.act;
 			
 			self.log(actionName, 'btnEvtAct');
 			self.callActionMethod(el, actionName);
-		});
+		}));
 	}
 	
 	/**
@@ -162,7 +165,7 @@ class CalculatorAbstractController {
 		}
 		
 		// Define variables
-		var view   = $(this.props.viewResult),
+		var view   = this.props.viewResult,
 			curVal = this.getViewValue(false);
 			
 		// Writes the current value into buffer, before set new value
@@ -170,17 +173,13 @@ class CalculatorAbstractController {
 			this.props.bufferNumber = curVal;
 		
 		// Transform newVal to human readable string
-		/*newVal = newVal.toString();
-		if ( (newVal.indexOf('.') >= 0) && (newVal.indexOf(',') < 0) ) {
-			newVal = newVal.replace('.', ',');
-		}*/
 		newVal = newVal.toLocaleString();
 		
 		// Append if current value not zero and appending is enabled
 		if ( append && (curVal != '0') ) {
-			view.text(curVal + '' + newVal);
+			view.innerText = curVal + '' + newVal;
 		} else {
-			view.text(newVal);
+			view.innerText = newVal;
 		}
 	}
 	
@@ -192,7 +191,7 @@ class CalculatorAbstractController {
 	 */
 	getViewValue(asNumber = false) {
 		// Get value
-		var val = this.props.viewResult.text();
+		let val = this.props.viewResult.innerText;
 		
 		// Convert to real number
 		if ( asNumber )
@@ -354,5 +353,15 @@ class CalculatorAbstractController {
 		
 		// Return
 		return val;
+	}
+
+	/**
+	 * Checks if its a number
+	 *
+	 * @param n
+	 * @returns {boolean|boolean}
+	 */
+	isNumeric(n) {
+		return !isNaN(parseFloat(n)) && isFinite(n);
 	}
 }

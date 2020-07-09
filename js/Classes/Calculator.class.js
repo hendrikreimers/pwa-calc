@@ -35,7 +35,7 @@ class Calculator extends CalculatorController {
         let self = this;
 
         // Register keypress event
-        $(document).on('keypress', function(evt) {
+        document.addEventListener('keypress', function(evt) {
             // declarations
             let key  = String.fromCharCode(evt.which),
                 expr = { num: /[0-9]/, op: /[\/*\-+,%]/ },
@@ -56,20 +56,30 @@ class Calculator extends CalculatorController {
                 // choose correct element list
                 let elements = ( elId === 'val' ) ? self.props.viewButtonsNum : self.props.viewButtonsOp;
 
-                // find the target element
-                $(elements)
-                    .filter('[data-' + elId + '="' + key + '"]')
-                    .trigger('click');
+                // Trigger click event on the given button
+                self.triggerClickEvent(elId, key, elements);
 
+                // Stop original functionality
                 evt.preventDefault();
             }
 
             // Fire "=" Button on press Enter
-            if ( evt.which === 13 ) {
-                $(self.props.viewButtonsAct)
-                    .filter('[data-act="="]')
-                    .trigger('click');
+            if ( evt.key === 'Enter' ) {
+                self.triggerClickEvent('act', '=', self.props.viewButtonsAct);
             }
         });
+    }
+
+    /**
+     * Triggers a mouse click event to an element identified by a data attribute and its value
+     *
+     * @param dataKey
+     * @param dataVal
+     * @param elements
+     */
+    triggerClickEvent(dataKey, dataVal, elements) {
+        // Filter through elements which has the given elId as data attribute and trigger a click event on them
+        Array.from(elements).filter(el => el.dataset[dataKey] == dataVal).map(el => el.click());
+        // [...self.props.viewButtonsAct].filter(el => el.dataset.act == '=').map(el => el.click());
     }
 }

@@ -50,7 +50,7 @@ class CalculatorController extends CalculatorAbstractController {
 		if ( curVal[curVal.length - 1] == '%' ) 
 			appendix = '%';
 		
-		if ( $.isNumeric(curVal) ) {
+		if ( this.isNumeric(curVal) ) {
 			this.setViewValue((curVal * -1) + appendix, false);
 		} else {
 			this.log('NaN', 'plusMinusAction');
@@ -98,7 +98,7 @@ class CalculatorController extends CalculatorAbstractController {
 		curVal = this.getOperatorFunc('%')(bufVal, curVal);
 
 		// set real val to calc
-		if ( $.isNumeric(curVal) ) {
+		if ( this.isNumeric(curVal) ) {
 			this.setViewValue(curVal, false, false);
 		} else return false;
 	}

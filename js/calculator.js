@@ -8,7 +8,7 @@
 /*                                                       */
 /*********************************************************/
 
-$(function() {
-	var calc = new Calculator('#calc');
-	//calc.props.debug = true;
+document.addEventListener("DOMContentLoaded",function() {
+	let calc = new Calculator('#calc');
+	// calc.props.debug = true;
 });
