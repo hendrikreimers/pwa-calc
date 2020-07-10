@@ -128,7 +128,7 @@ class CalculatorAbstractController {
 		let self = this;
 
 		// Unpack with "[...NodeList]" to an array so we get an array on which we can map each element
-		Array.from(this.props.viewButtonsNum).map(el => el.addEventListener('click', function(el) {
+		this.props.viewButtonsNum.forEach(el => el.addEventListener('click', function(el) {
 			var numVal = this.dataset.val;
 
 			self.log(numVal, 'btnEvtNum');
@@ -136,7 +136,7 @@ class CalculatorAbstractController {
 		}));
 
 		// Unpack with "[...NodeList]" to an array so we get an array on which we can map each element
-		Array.from(this.props.viewButtonsOp).map(el => el.addEventListener('click', function(el) {
+		this.props.viewButtonsOp.forEach(el => el.addEventListener('click', function(el) {
 			var operatorVal = this.dataset.op;
 			
 			self.log(operatorVal, 'btnEvtOp');
@@ -144,7 +144,7 @@ class CalculatorAbstractController {
 		}));
 
 		// Unpack with "[...NodeList]" to an array so we get an array on which we can map each element
-		Array.from(this.props.viewButtonsAct).map(el => el.addEventListener('click', function(el) {
+		this.props.viewButtonsAct.forEach(el => el.addEventListener('click', function(el) {
 			var actionName = this.dataset.act;
 			
 			self.log(actionName, 'btnEvtAct');

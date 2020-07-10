@@ -49,8 +49,7 @@ html, body {
 
 	border: 0;
 
-    justify-content: right;
-    align-items: flex-end;
+    display: block;
 }
 
 .btn {
